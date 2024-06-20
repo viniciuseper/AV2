@@ -9,16 +9,19 @@ public class Usuario {
     @Id
     private String id;
 
+    private String nome;
+
     private String senha;
+
+    private String emailUser;
 
     private String tipo;
 
-    private String nome;
-
-    public Usuario(String id, String nomeUsuario, String senha, String tipoConta) {
+    public Usuario(String id, String nomeUsuario, String senha, String email, String tipoConta) {
         this.id = id;
         this.nome = nomeUsuario;
         this.senha = senha;
+        this.emailUser = email;
         this.tipo = tipoConta;
     }
 
@@ -48,6 +51,14 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getEmailUser() {
+        return emailUser;
+    }
+
+    public void setEmailUser(String email) {
+        this.emailUser = email;
     }
 
     public String getTipoConta() {

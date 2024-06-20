@@ -14,39 +14,38 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping("/save")
-    public Object salvar(@RequestParam("id") String idUsuario, @RequestParam("nomeUsuario") String nomeUsuario, @RequestParam("senha") String senha, @RequestParam("identificadorTipoUsuario") long identificadorTipoUsuario) {
-        try{
-            return this.usuarioService.cadastraUsuario(idUsuario, nomeUsuario, senha, identificadorTipoUsuario);
-        } catch (Exception e){
+    public ResponseEntity<?> salvar(@RequestParam("id") String idUsuario, @RequestParam("nomeUsuario") String nomeUsuario, @RequestParam("senha") String senha, @RequestParam("email") String email, @RequestParam("identificadorTipoUsuario") long identificadorTipoUsuario) {
+        try {
+            return ResponseEntity.ok(this.usuarioService.cadastraUsuario(idUsuario, nomeUsuario, senha, email, identificadorTipoUsuario));
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro não tratado: " + e.getMessage());
         }
     }
 
     @DeleteMapping("/delete")
-    public Object deletar(@RequestParam("id") String idUsuario){
-        try{
-            return this.usuarioService.apagarUsuario(idUsuario);
+    public ResponseEntity<?> deletar(@RequestParam("id") String idUsuario) {
+        try {
+            return ResponseEntity.ok(this.usuarioService.apagarUsuario(idUsuario));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro não tratado: " + e.getMessage());
         }
     }
 
     @GetMapping("/findAll")
-    public Object obterTodos(){
-        try{
-            return this.usuarioService.obtemTodos();
+    public ResponseEntity<?> obterTodos() {
+        try {
+            return ResponseEntity.ok(this.usuarioService.obtemTodos());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro não tratado: " + e.getMessage());
         }
     }
 
     @GetMapping("/findById")
-    public Object obterPorId(@RequestParam("id") String idUsuario){
-        try{
-            return this.usuarioService.findById(idUsuario);
+    public ResponseEntity<?> obterPorId(@RequestParam("id") String idUsuario) {
+        try {
+            return ResponseEntity.ok(this.usuarioService.findById(idUsuario));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro não tratado: " + e.getMessage());
         }
     }
-
 }

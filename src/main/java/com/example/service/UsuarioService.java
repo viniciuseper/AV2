@@ -11,34 +11,39 @@ import java.util.Optional;
 @Service
 public class UsuarioService {
 
-    private final String USUARIO = "USUARIO";
-    private final String MODERADOR = "MODERADOR";
     private final String ADMIN = "ADMIN";
+    private final String GERENTE = "GERENTE";
+    private final String VENDEDOR = "VENDEDOR";
+    private final String CLIENTE = "CLIENTE";
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Usuario cadastraUsuario(String id, String nomeUsuario, String senha, long identificadorTipoUsuario) throws Exception{
+    public Usuario cadastraUsuario(String id, String nomeUsuario, String senha, String email, long identificadorTipoUsuario) throws Exception{
         Usuario usuario = new Usuario();
         usuario.setId(id);
         usuario.setNome(nomeUsuario);
         usuario.setSenha(senha);
+        usuario.setEmailUser(email);
 
         switch ((int) identificadorTipoUsuario) {
             case 1:
-                usuario.setTipoConta(USUARIO);
-                break;
-            case 2:
-                usuario.setTipoConta(MODERADOR);
-                break;
-            case 3:
                 usuario.setTipoConta(ADMIN);
                 break;
+            case 2:
+                usuario.setTipoConta(GERENTE);
+                break;
+            case 3:
+                usuario.setTipoConta(VENDEDOR);
+                break;
+            case 4:
+                usuario.setTipoConta(CLIENTE);
+                break;
             default:
-                throw new Exception("Esolha o tipo de usuário corretamentre!!!! Exemplo: 1- COMUM, 2 - MODERADOR, 3 - ADMIN");
+                throw new Exception("Esolha o tipo de usuário corretamentre!!!! Exemplo: 1- ADMIN, 2 - GERENTE, 3 - VENDEDOR, 4 - CLIENTE");
         }
 
-         return this.salvarUsuario(usuario);
+        return this.salvarUsuario(usuario);
     }
 
     public List<Usuario> obtemTodos(){

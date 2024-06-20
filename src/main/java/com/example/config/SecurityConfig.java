@@ -37,21 +37,26 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User.builder()
-                .username("userStandard")
-                .password(passwordEncoder().encode("2909"))
-                .roles("USER")
-                .build();
-        UserDetails admin = User.builder()
                 .username("userAdmin")
-                .password(passwordEncoder().encode("2909"))
+                .password(passwordEncoder().encode("0102"))
                 .roles("ADMIN")
                 .build();
-        UserDetails mod = User.builder()
-                .username("userMod")
-                .password(passwordEncoder().encode("2909"))
-                .roles("MOD")
+        UserDetails gerente = User.builder()
+                .username("userGerente")
+                .password(passwordEncoder().encode("0102"))
+                .roles("GERENTE")
                 .build();
-        return new InMemoryUserDetailsManager(user, admin, mod);
+        UserDetails vendedor = User.builder()
+                .username("userVendedor")
+                .password(passwordEncoder().encode("0102"))
+                .roles("VENDEDOR")
+                .build();
+        UserDetails cliente = User.builder()
+                .username("userCliente")
+                .password(passwordEncoder().encode("0102"))
+                .roles("CLIENTE")
+                .build();
+        return new InMemoryUserDetailsManager(user, gerente, vendedor, cliente);
     }
 
     @Bean
